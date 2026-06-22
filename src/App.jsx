@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API_BASE = "https://api.tiklydown.eu.org/api/download/v3";
+const API_BASE = "/api/download";
 
 const DownloadIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
