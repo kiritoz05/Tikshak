@@ -2,439 +2,437 @@ import { useState } from "react";
 
 const API_BASE = "/api/download";
 
-const DownloadIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-    <polyline points="7 10 12 15 17 10"/>
-    <line x1="12" y1="15" x2="12" y2="3"/>
+/* ── Icons ── */
+const IcDownload = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+);
+const IcMusic = () => (
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+  </svg>
+);
+const IcVideo = () => (
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
+  </svg>
+);
+const IcSpin = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" style={{animation:"spin .7s linear infinite",display:"block"}}>
+    <path d="M12 2a10 10 0 0 1 10 10" opacity=".3"/><path d="M22 12A10 10 0 0 1 2 12"/>
+  </svg>
+);
+const IcX = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+  </svg>
+);
+const IcHD = () => (
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 12h3m0 0V9m0 3v3m5-6v6m0-3h-3"/>
+  </svg>
+);
+const IcStar = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
   </svg>
 );
 
-const MusicIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 18V5l12-2v13"/>
-    <circle cx="6" cy="18" r="3"/>
-    <circle cx="18" cy="16" r="3"/>
+/* ── TikShak Logo ── */
+const Logo = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <defs>
+      <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#ff2d55"/>
+        <stop offset="100%" stopColor="#ff6b00"/>
+      </linearGradient>
+    </defs>
+    <rect width="32" height="32" rx="9" fill="url(#lg1)"/>
+    <path d="M22 9a5.5 5.5 0 0 1-4.5-4.5V3h-3.5v13.5a3 3 0 1 1-3-3c.3 0 .6 0 .9.1V10a6.5 6.5 0 1 0 6.1 6.5V10.8A9.2 9.2 0 0 0 23 12V9a5.5 5.5 0 0 1-1 0z" fill="white"/>
   </svg>
 );
 
-const VideoIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <polygon points="23 7 16 12 23 17 23 7"/>
-    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-  </svg>
-);
-
-const SpinnerIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{animation:"spin 0.8s linear infinite"}}>
-    <line x1="12" y1="2" x2="12" y2="6"/>
-    <line x1="12" y1="18" x2="12" y2="22"/>
-    <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
-    <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
-    <line x1="2" y1="12" x2="6" y2="12"/>
-    <line x1="18" y1="12" x2="22" y2="12"/>
-    <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
-    <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
-  </svg>
-);
-
-const XIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="18" y1="6" x2="6" y2="18"/>
-    <line x1="6" y1="6" x2="18" y2="18"/>
-  </svg>
-);
-
-const TikTokLogo = () => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.69a8.17 8.17 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.02-.07z"/>
-  </svg>
-);
-
-export default function TikTokDownloader() {
+export default function TikShak() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
   const [downloading, setDownloading] = useState({});
 
-  const downloadFile = async (fileUrl, filename) => {
-    const key = fileUrl;
-    setDownloading(prev => ({ ...prev, [key]: true }));
-    try {
-      const res = await fetch(fileUrl);
-      if (!res.ok) throw new Error("Error al descargar");
-      const blob = await res.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = blobUrl;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
-    } catch {
-      // Fallback: abrir en nueva pestaña
-      window.open(fileUrl, "_blank");
-    } finally {
-      setDownloading(prev => ({ ...prev, [key]: false }));
-    }
-  };
+  const isValidUrl = (u) => /tiktok\.com|vm\.tiktok\.com|vt\.tiktok\.com/.test(u);
 
-  const isValidTikTokUrl = (u) =>
-    /tiktok\.com|vm\.tiktok\.com|vt\.tiktok\.com/.test(u);
-
-  const handleDownload = async () => {
+  const handleFetch = async () => {
     const trimmed = url.trim();
-    if (!trimmed) { setError("Por favor pega un enlace de TikTok."); return; }
-    if (!isValidTikTokUrl(trimmed)) { setError("El enlace no parece ser de TikTok. Verifica e intenta de nuevo."); return; }
-
-    setLoading(true);
-    setError("");
-    setResult(null);
-
+    if (!trimmed) { setError("Pega un enlace de TikTok primero."); return; }
+    if (!isValidUrl(trimmed)) { setError("Ese enlace no parece ser de TikTok."); return; }
+    setLoading(true); setError(""); setResult(null);
     try {
       const res = await fetch(`${API_BASE}?url=${encodeURIComponent(trimmed)}`);
-      if (!res.ok) throw new Error(`Error del servidor: ${res.status}`);
+      if (!res.ok) throw new Error(`Error ${res.status}`);
       const data = await res.json();
-
-      if (!data || data.status === false) throw new Error("No se pudo obtener el video. Verifica el enlace.");
-
+      if (!data || data.error) throw new Error(data?.error || "No se pudo obtener el video.");
       setResult(data);
     } catch (e) {
-      setError(e.message || "Ocurrió un error inesperado. Intenta con otro enlace.");
-    } finally {
-      setLoading(false);
-    }
+      setError(e.message || "Error inesperado. Intenta con otro enlace.");
+    } finally { setLoading(false); }
   };
 
   const handlePaste = async () => {
-    try {
-      const text = await navigator.clipboard.readText();
-      setUrl(text);
-      setError("");
-    } catch {
-      setError("No se pudo acceder al portapapeles. Pega manualmente.");
-    }
+    try { const t = await navigator.clipboard.readText(); setUrl(t); setError(""); }
+    catch { setError("No se pudo acceder al portapapeles."); }
   };
 
-  const clear = () => { setUrl(""); setResult(null); setError(""); };
+  const downloadFile = async (fileUrl, filename) => {
+    setDownloading(p => ({ ...p, [fileUrl]: true }));
+    try {
+      const res = await fetch(fileUrl);
+      const blob = await res.blob();
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+    } catch { window.open(fileUrl, "_blank"); }
+    finally { setDownloading(p => ({ ...p, [fileUrl]: false })); }
+  };
 
-  const formatNumber = (n) => {
+  const fmt = (n) => {
     if (!n) return "0";
-    if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
-    if (n >= 1_000) return (n / 1_000).toFixed(1) + "K";
+    if (n >= 1e6) return (n / 1e6).toFixed(1) + "M";
+    if (n >= 1e3) return (n / 1e3).toFixed(1) + "K";
     return String(n);
   };
 
   return (
-    <div style={{minHeight:"100vh",background:"#0a0a0a",fontFamily:"'Outfit',sans-serif",color:"#fff"}}>
+    <div style={{ minHeight: "100vh", background: "#080810", fontFamily: "'Space Grotesk', sans-serif", color: "#fff", overflowX: "hidden" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
         @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
-        @keyframes gradientShift {
-          0%{background-position:0% 50%}
-          50%{background-position:100% 50%}
-          100%{background-position:0% 50%}
+        @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes glow { 0%,100%{opacity:.6} 50%{opacity:1} }
+        @keyframes shimmer { from{background-position:-200% center} to{background-position:200% center} }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes pulse-ring { 0%{transform:scale(.95);box-shadow:0 0 0 0 rgba(255,45,85,.4)} 70%{transform:scale(1);box-shadow:0 0 0 12px rgba(255,45,85,0)} 100%{transform:scale(.95)} }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        ::selection { background: #ff2d55; color: #fff; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #ff2d5540; border-radius: 2px; }
+
+        .orb { position:fixed; border-radius:50%; filter:blur(80px); pointer-events:none; z-index:0; }
+
+        .glass {
+          background: rgba(255,255,255,.04);
+          border: 1px solid rgba(255,255,255,.08);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
         }
-        * { box-sizing:border-box; margin:0; padding:0; }
-        ::selection { background:#ff2d55; color:#fff; }
-        ::-webkit-scrollbar { width:6px; }
-        ::-webkit-scrollbar-track { background:#111; }
-        ::-webkit-scrollbar-thumb { background:#333; border-radius:3px; }
-        .input-box {
-          transition: border-color 0.2s, box-shadow 0.2s;
+
+        .input-wrap {
+          background: rgba(255,255,255,.05);
+          border: 1.5px solid rgba(255,255,255,.1);
+          border-radius: 18px;
+          transition: border-color .2s, box-shadow .2s;
         }
-        .input-box:focus-within {
-          border-color: #ff2d55 !important;
-          box-shadow: 0 0 0 3px rgba(255,45,85,0.15) !important;
+        .input-wrap:focus-within {
+          border-color: #ff2d55;
+          box-shadow: 0 0 0 4px rgba(255,45,85,.12), 0 0 40px rgba(255,45,85,.08);
         }
-        .dl-btn {
-          transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
-          cursor: pointer;
+
+        .btn-main {
+          background: linear-gradient(135deg, #ff2d55 0%, #ff6b00 100%);
+          border: none; border-radius: 14px; color: #fff;
+          font-family: 'Space Grotesk', sans-serif;
+          font-weight: 700; font-size: 15px; cursor: pointer;
+          display: flex; align-items: center; gap: 8px;
+          transition: transform .15s, box-shadow .2s, opacity .2s;
+          padding: 13px 22px;
+          white-space: nowrap;
         }
-        .dl-btn:hover:not(:disabled) {
-          transform: translateY(-1px);
-          box-shadow: 0 6px 24px rgba(255,45,85,0.4);
+        .btn-main:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,45,85,.45); }
+        .btn-main:active:not(:disabled) { transform: translateY(0); }
+        .btn-main:disabled { opacity: .6; cursor: not-allowed; }
+
+        .btn-paste {
+          background: rgba(255,255,255,.07);
+          border: 1px solid rgba(255,255,255,.1);
+          border-radius: 10px; color: #aaa;
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 13px; font-weight: 500;
+          padding: 8px 14px; cursor: pointer;
+          transition: background .15s, color .15s;
         }
-        .dl-btn:active:not(:disabled) { transform: translateY(0); }
-        .dl-btn:disabled { opacity:0.6; cursor:not-allowed; }
-        .icon-btn {
-          background:none; border:none; cursor:pointer;
-          color:#888; transition:color 0.15s;
+        .btn-paste:hover { background: rgba(255,255,255,.12); color: #fff; }
+
+        .btn-clear { background:none; border:none; color:#555; cursor:pointer; padding:6px; transition:color .15s; display:flex; }
+        .btn-clear:hover { color:#fff; }
+
+        .result-card {
+          animation: fadeUp .4s ease both;
+          background: rgba(255,255,255,.03);
+          border: 1px solid rgba(255,255,255,.08);
+          border-radius: 20px; overflow: hidden;
         }
-        .icon-btn:hover { color:#fff; }
-        .card {
-          animation: fadeUp 0.4s ease both;
-          background: #141414;
-          border: 1px solid #222;
-          border-radius: 16px;
-          overflow: hidden;
+
+        .dl-chip {
+          display: inline-flex; align-items: center; gap: 8px;
+          border-radius: 12px; padding: 11px 18px;
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 13px; font-weight: 600;
+          cursor: pointer; border: none;
+          transition: transform .15s, box-shadow .2s, opacity .2s;
         }
-        .video-chip {
-          display:inline-flex; align-items:center; gap:6px;
-          background:#1e1e1e; border:1px solid #2a2a2a;
-          border-radius:8px; padding:8px 14px; font-size:13px;
-          color:#ccc; text-decoration:none;
-          transition: background 0.15s, border-color 0.15s, color 0.15s;
-          cursor:pointer; font-family:'Outfit',sans-serif;
+        .dl-chip:disabled { opacity: .55; cursor: not-allowed; }
+        .dl-chip.primary {
+          background: linear-gradient(135deg,#ff2d55,#ff6b00);
+          color: #fff;
         }
-        .video-chip:hover {
-          background:#252525; border-color:#ff2d55; color:#fff;
+        .dl-chip.primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,45,85,.4); }
+        .dl-chip.secondary {
+          background: rgba(255,255,255,.07);
+          border: 1px solid rgba(255,255,255,.1);
+          color: #ccc;
         }
-        .video-chip:disabled { opacity:0.6; cursor:not-allowed; }
-        .video-chip:disabled:hover { background:#1e1e1e; border-color:#2a2a2a; color:#ccc; }
-        .video-chip.primary {
-          background: linear-gradient(135deg,#ff2d55,#ff6b35);
-          border-color:transparent; color:#fff;
+        .dl-chip.secondary:hover:not(:disabled) { background: rgba(255,255,255,.12); color:#fff; transform:translateY(-1px); }
+
+        .stat-tag {
+          background: rgba(255,255,255,.05);
+          border: 1px solid rgba(255,255,255,.08);
+          border-radius: 999px; padding: 4px 12px;
+          font-size: 12px; color: #888;
+          display: inline-flex; align-items: center; gap: 5px;
         }
-        .video-chip.primary:hover {
-          filter:brightness(1.1);
-          border-color:transparent;
+
+        .feature-card {
+          background: rgba(255,255,255,.03);
+          border: 1px solid rgba(255,255,255,.07);
+          border-radius: 16px; padding: 22px;
+          transition: border-color .2s, background .2s;
         }
-        .stat-pill {
-          background:#1a1a1a; border:1px solid #222; border-radius:999px;
-          padding:5px 12px; font-size:12px; color:#999;
-          display:inline-flex; align-items:center; gap:5px;
+        .feature-card:hover { border-color: rgba(255,45,85,.3); background: rgba(255,45,85,.04); }
+
+        .step-num {
+          width: 36px; height: 36px; border-radius: 10px;
+          background: linear-gradient(135deg,#ff2d55,#ff6b00);
+          display: flex; align-items: center; justify-content: center;
+          font-size: 13px; font-weight: 700; color: #fff;
+          flex-shrink: 0;
         }
-        .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-        @media(max-width:600px) { .steps-grid { grid-template-columns:1fr; } }
+
+        .badge {
+          display: inline-flex; align-items: center; gap: 5px;
+          background: rgba(255,45,85,.12); border: 1px solid rgba(255,45,85,.25);
+          border-radius: 999px; padding: 5px 13px;
+          font-size: 12px; font-weight: 600; color: #ff6b6b;
+          letter-spacing: .3px;
+        }
+
+        .shimmer-text {
+          background: linear-gradient(90deg, #fff 0%, #ff2d55 40%, #ff9500 60%, #fff 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: shimmer 4s linear infinite;
+        }
+
+        @media (max-width: 600px) {
+          .hero-title { font-size: 36px !important; }
+          .input-row { flex-wrap: wrap; }
+          .btn-main span { display: none; }
+          .features-grid { grid-template-columns: 1fr !important; }
+        }
       `}</style>
 
-      {/* Header */}
-      <header style={{borderBottom:"1px solid #161616",padding:"0 24px"}}>
-        <div style={{maxWidth:760,margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",height:60}}>
-          <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <div style={{color:"#ff2d55"}}><TikTokLogo/></div>
-            <span style={{fontWeight:700,fontSize:17,letterSpacing:"-0.3px"}}>
-              TikSave<span style={{color:"#ff2d55"}}>.</span>
+      {/* Ambient orbs */}
+      <div className="orb" style={{ width:500, height:500, background:"#ff2d5520", top:-150, right:-100 }}/>
+      <div className="orb" style={{ width:400, height:400, background:"#ff6b0015", bottom:0, left:-100 }}/>
+      <div className="orb" style={{ width:300, height:300, background:"#7c3aed10", top:"40%", left:"50%" }}/>
+
+      {/* ── Header ── */}
+      <header style={{ position:"relative", zIndex:10, borderBottom:"1px solid rgba(255,255,255,.06)", padding:"0 24px" }}>
+        <div style={{ maxWidth:820, margin:"0 auto", display:"flex", alignItems:"center", justifyContent:"space-between", height:64 }}>
+          <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+            <Logo/>
+            <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:22, letterSpacing:"-0.5px" }}>
+              Tik<span style={{ color:"#ff2d55" }}>Shak</span>
             </span>
           </div>
-          <span style={{fontSize:12,color:"#444",background:"#111",border:"1px solid #222",borderRadius:6,padding:"4px 10px"}}>
-            Sin anuncios · Sin registro
-          </span>
+          <div className="badge">
+            <IcStar/> 100% Gratis
+          </div>
         </div>
       </header>
 
-      <main style={{maxWidth:760,margin:"0 auto",padding:"48px 24px 80px"}}>
+      <main style={{ position:"relative", zIndex:1, maxWidth:820, margin:"0 auto", padding:"60px 20px 100px" }}>
 
-        {/* Hero */}
-        <div style={{textAlign:"center",marginBottom:40}}>
-          <div style={{
-            display:"inline-block",marginBottom:16,
-            background:"linear-gradient(135deg,#ff2d55 0%,#ff6b35 100%)",
-            backgroundSize:"200% 200%",
-            animation:"gradientShift 4s ease infinite",
-            borderRadius:14,padding:"8px 18px",
-            fontSize:12,fontWeight:600,letterSpacing:"0.5px",textTransform:"uppercase"
-          }}>
-            Descargador gratuito
+        {/* ── Hero ── */}
+        <div style={{ textAlign:"center", marginBottom:52 }}>
+          <div style={{ marginBottom:20 }}>
+            <span style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(255,45,85,.1)", border:"1px solid rgba(255,45,85,.2)", borderRadius:999, padding:"6px 16px", fontSize:12, fontWeight:600, color:"#ff8099", letterSpacing:".5px", textTransform:"uppercase" }}>
+              ✦ Sin anuncios · Sin virus · Sin registro
+            </span>
           </div>
-          <h1 style={{fontSize:"clamp(28px,6vw,46px)",fontWeight:800,lineHeight:1.1,letterSpacing:"-1px",marginBottom:12}}>
+
+          <h1 className="hero-title" style={{ fontFamily:"'Syne',sans-serif", fontSize:56, fontWeight:800, lineHeight:1.05, letterSpacing:"-2px", marginBottom:16 }}>
             Descarga TikToks<br/>
-            <span style={{
-              background:"linear-gradient(90deg,#ff2d55,#ff9500)",
-              WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"
-            }}>sin marca de agua</span>
+            <span className="shimmer-text">sin marca de agua</span>
           </h1>
-          <p style={{color:"#666",fontSize:15,maxWidth:440,margin:"0 auto"}}>
-            Pega el enlace, descarga en segundos. Sin anuncios, sin virus, sin registro.
+
+          <p style={{ color:"#666", fontSize:16, maxWidth:420, margin:"0 auto", lineHeight:1.7 }}>
+            Pega el link, descarga en segundos. Calidad HD. Audio MP3. Todo gratis.
           </p>
         </div>
 
-        {/* Input */}
-        <div className="input-box" style={{
-          display:"flex",alignItems:"center",gap:0,
-          background:"#111",border:"1px solid #222",borderRadius:14,
-          padding:"6px 6px 6px 18px",marginBottom:error?"12px":"32px"
-        }}>
-          <input
-            value={url}
-            onChange={e=>{setUrl(e.target.value);setError("");}}
-            onKeyDown={e=>e.key==="Enter"&&handleDownload()}
-            placeholder="https://www.tiktok.com/@usuario/video/..."
-            style={{
-              flex:1,background:"none",border:"none",outline:"none",
-              color:"#fff",fontSize:14,fontFamily:"'Outfit',sans-serif",
-              minWidth:0
-            }}
-          />
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            {url && (
-              <button className="icon-btn" onClick={clear} style={{padding:"6px"}}>
-                <XIcon/>
+        {/* ── Search Box ── */}
+        <div style={{ maxWidth:680, margin:"0 auto 40px" }}>
+          <div className="input-wrap" style={{ display:"flex", alignItems:"center", padding:"6px 6px 6px 20px", gap:8 }}>
+            <input
+              value={url}
+              onChange={e => { setUrl(e.target.value); setError(""); }}
+              onKeyDown={e => e.key === "Enter" && handleFetch()}
+              placeholder="https://www.tiktok.com/@usuario/video/..."
+              style={{
+                flex:1, background:"none", border:"none", outline:"none",
+                color:"#fff", fontSize:14, fontFamily:"'Space Grotesk',sans-serif",
+                minWidth:0, padding:"6px 0"
+              }}
+            />
+            <div className="input-row" style={{ display:"flex", alignItems:"center", gap:6, flexShrink:0 }}>
+              {url && <button className="btn-clear" onClick={() => { setUrl(""); setResult(null); setError(""); }}><IcX/></button>}
+              <button className="btn-paste" onClick={handlePaste}>Pegar</button>
+              <button className="btn-main" onClick={handleFetch} disabled={loading}>
+                {loading ? <IcSpin/> : <IcDownload/>}
+                <span>{loading ? "Buscando..." : "Descargar"}</span>
               </button>
-            )}
-            <button
-              className="icon-btn"
-              onClick={handlePaste}
-              style={{
-                padding:"8px 12px",fontSize:12,fontWeight:600,
-                color:"#888",borderRadius:8,
-                border:"1px solid #222",background:"#161616"
-              }}
-            >
-              Pegar
-            </button>
-            <button
-              className="dl-btn"
-              onClick={handleDownload}
-              disabled={loading}
-              style={{
-                background:"linear-gradient(135deg,#ff2d55,#e0003a)",
-                color:"#fff",border:"none",borderRadius:10,
-                padding:"10px 20px",fontWeight:700,fontSize:14,
-                fontFamily:"'Outfit',sans-serif",
-                display:"flex",alignItems:"center",gap:8
-              }}
-            >
-              {loading ? <><SpinnerIcon/> Buscando...</> : <><DownloadIcon/> Descargar</>}
-            </button>
+            </div>
           </div>
+
+          {/* Error */}
+          {error && (
+            <div style={{ marginTop:12, background:"rgba(255,45,85,.08)", border:"1px solid rgba(255,45,85,.2)", borderRadius:12, padding:"12px 16px", color:"#ff8099", fontSize:13, display:"flex", alignItems:"center", gap:8 }}>
+              <span style={{ fontSize:16 }}>⚠</span> {error}
+            </div>
+          )}
         </div>
 
-        {/* Error */}
-        {error && (
-          <div style={{
-            background:"rgba(255,45,85,0.08)",border:"1px solid rgba(255,45,85,0.25)",
-            borderRadius:10,padding:"12px 16px",marginBottom:28,
-            color:"#ff6b6b",fontSize:14,display:"flex",alignItems:"center",gap:8
-          }}>
-            <span>⚠</span> {error}
-          </div>
-        )}
-
-        {/* Result */}
+        {/* ── Result Card ── */}
         {result && (
-          <div className="card" style={{marginBottom:32}}>
-            {/* Thumbnail + info */}
-            <div style={{display:"flex",gap:0,flexWrap:"wrap"}}>
+          <div className="result-card" style={{ maxWidth:680, margin:"0 auto 48px" }}>
+            {/* Top: thumbnail + info */}
+            <div style={{ display:"flex", gap:0 }}>
               {result.cover && (
-                <div style={{position:"relative",flexShrink:0}}>
-                  <img
-                    src={result.cover}
-                    alt="thumbnail"
-                    style={{width:140,height:190,objectFit:"cover",display:"block"}}
-                    onError={e=>{e.target.style.display="none";}}
-                  />
-                  <div style={{
-                    position:"absolute",inset:0,
-                    background:"linear-gradient(to right,transparent 60%,#141414)"
-                  }}/>
+                <div style={{ position:"relative", flexShrink:0, width:130 }}>
+                  <img src={result.cover} alt="cover"
+                    style={{ width:"100%", height:180, objectFit:"cover", display:"block" }}
+                    onError={e => e.target.style.display="none"}/>
+                  <div style={{ position:"absolute", inset:0, background:"linear-gradient(to right,transparent 50%,#080810)" }}/>
+                  <div style={{ position:"absolute", inset:0, background:"linear-gradient(to top,#08081080,transparent)" }}/>
                 </div>
               )}
-              <div style={{flex:1,padding:"20px 20px 20px",minWidth:200}}>
+              <div style={{ flex:1, padding:"20px 20px 16px" }}>
                 {result.author && (
-                  <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
+                  <div style={{ display:"flex", alignItems:"center", gap:9, marginBottom:10 }}>
                     {result.author.avatar && (
-                      <img src={result.author.avatar} alt="" style={{width:32,height:32,borderRadius:"50%",objectFit:"cover"}}
-                        onError={e=>e.target.style.display="none"}/>
+                      <img src={result.author.avatar} alt="" style={{ width:34, height:34, borderRadius:"50%", objectFit:"cover", border:"2px solid rgba(255,45,85,.4)" }}
+                        onError={e => e.target.style.display="none"}/>
                     )}
                     <div>
-                      <div style={{fontSize:13,fontWeight:600}}>{result.author.nickname || result.author.unique_id || "TikToker"}</div>
-                      {result.author.unique_id && (
-                        <div style={{fontSize:11,color:"#555"}}>@{result.author.unique_id}</div>
-                      )}
+                      <div style={{ fontSize:14, fontWeight:600 }}>{result.author.nickname || "TikToker"}</div>
+                      {result.author.unique_id && <div style={{ fontSize:11, color:"#555" }}>@{result.author.unique_id}</div>}
                     </div>
                   </div>
                 )}
                 {result.title && (
-                  <p style={{fontSize:13,color:"#aaa",lineHeight:1.5,marginBottom:14,
-                    display:"-webkit-box",WebkitLineClamp:3,WebkitBoxOrient:"vertical",overflow:"hidden"}}>
+                  <p style={{ fontSize:13, color:"#888", lineHeight:1.55, marginBottom:14, display:"-webkit-box", WebkitLineClamp:2, WebkitBoxOrient:"vertical", overflow:"hidden" }}>
                     {result.title}
                   </p>
                 )}
-                {/* Stats */}
-                <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:16}}>
-                  {result.stats?.playCount > 0 && <span className="stat-pill">▶ {formatNumber(result.stats.playCount)}</span>}
-                  {result.stats?.likeCount > 0 && <span className="stat-pill">♥ {formatNumber(result.stats.likeCount)}</span>}
-                  {result.stats?.commentCount > 0 && <span className="stat-pill">💬 {formatNumber(result.stats.commentCount)}</span>}
-                  {result.stats?.shareCount > 0 && <span className="stat-pill">↗ {formatNumber(result.stats.shareCount)}</span>}
+                <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
+                  {result.stats?.playCount > 0 && <span className="stat-tag">▶ {fmt(result.stats.playCount)}</span>}
+                  {result.stats?.likeCount > 0 && <span className="stat-tag">♥ {fmt(result.stats.likeCount)}</span>}
+                  {result.stats?.commentCount > 0 && <span className="stat-tag">💬 {fmt(result.stats.commentCount)}</span>}
                 </div>
               </div>
             </div>
 
-            {/* Download options */}
-            <div style={{borderTop:"1px solid #1e1e1e",padding:"20px"}}>
-              <p style={{fontSize:12,color:"#555",marginBottom:12,textTransform:"uppercase",letterSpacing:"0.5px",fontWeight:600}}>
+            {/* Divider */}
+            <div style={{ height:1, background:"rgba(255,255,255,.06)" }}/>
+
+            {/* Download buttons */}
+            <div style={{ padding:"18px 20px" }}>
+              <p style={{ fontSize:11, color:"#444", fontWeight:600, letterSpacing:".8px", textTransform:"uppercase", marginBottom:14 }}>
                 Opciones de descarga
               </p>
-              <div style={{display:"flex",flexWrap:"wrap",gap:10}}>
-                {/* No watermark video */}
+              <div style={{ display:"flex", flexWrap:"wrap", gap:10 }}>
                 {(result.video?.noWatermark || result.links?.play) && (() => {
-                  const dlUrl = result.video?.noWatermark || result.links?.play;
+                  const u = result.video?.noWatermark || result.links?.play;
                   return (
-                    <button
-                      className="video-chip primary"
-                      onClick={() => downloadFile(dlUrl, "tikshan-video.mp4")}
-                      disabled={downloading[dlUrl]}
-                    >
-                      {downloading[dlUrl] ? <><SpinnerIcon/> Descargando...</> : <><VideoIcon/> Video sin marca de agua</>}
+                    <button className="dl-chip primary" onClick={() => downloadFile(u, "tikshak.mp4")} disabled={!!downloading[u]}>
+                      {downloading[u] ? <IcSpin/> : <IcVideo/>}
+                      {downloading[u] ? "Descargando..." : "Sin marca de agua"}
                     </button>
                   );
                 })()}
-                {/* HD */}
                 {result.video?.HD && (
-                  <button
-                    className="video-chip"
-                    onClick={() => downloadFile(result.video.HD, "tikshan-hd.mp4")}
-                    disabled={downloading[result.video.HD]}
-                  >
-                    {downloading[result.video.HD] ? <><SpinnerIcon/> Descargando...</> : <><VideoIcon/> Video HD</>}
+                  <button className="dl-chip secondary" onClick={() => downloadFile(result.video.HD, "tikshak-hd.mp4")} disabled={!!downloading[result.video.HD]}>
+                    {downloading[result.video.HD] ? <IcSpin/> : <IcHD/>}
+                    {downloading[result.video.HD] ? "Descargando..." : "HD"}
                   </button>
                 )}
-                {/* Watermark version */}
                 {result.video?.watermark && (
-                  <button
-                    className="video-chip"
-                    onClick={() => downloadFile(result.video.watermark, "tikshan-wm.mp4")}
-                    disabled={downloading[result.video.watermark]}
-                  >
-                    {downloading[result.video.watermark] ? <><SpinnerIcon/> Descargando...</> : <><VideoIcon/> Con marca de agua</>}
+                  <button className="dl-chip secondary" onClick={() => downloadFile(result.video.watermark, "tikshak-wm.mp4")} disabled={!!downloading[result.video.watermark]}>
+                    {downloading[result.video.watermark] ? <IcSpin/> : <IcVideo/>}
+                    {downloading[result.video.watermark] ? "Descargando..." : "Con marca de agua"}
                   </button>
                 )}
-                {/* Music */}
                 {(result.music?.play || result.links?.music) && (() => {
-                  const musicUrl = result.music?.play || result.links?.music;
+                  const u = result.music?.play || result.links?.music;
                   return (
-                    <button
-                      className="video-chip"
-                      onClick={() => downloadFile(musicUrl, "tikshan-audio.mp3")}
-                      disabled={downloading[musicUrl]}
-                    >
-                      {downloading[musicUrl] ? <><SpinnerIcon/> Descargando...</> : <><MusicIcon/> Audio MP3</>}
+                    <button className="dl-chip secondary" onClick={() => downloadFile(u, "tikshak-audio.mp3")} disabled={!!downloading[u]}>
+                      {downloading[u] ? <IcSpin/> : <IcMusic/>}
+                      {downloading[u] ? "Descargando..." : "Audio MP3"}
                     </button>
                   );
                 })()}
               </div>
-              <p style={{fontSize:11,color:"#444",marginTop:12}}>
-                ⬇️ El archivo se descarga directo a tu dispositivo
+              <p style={{ fontSize:11, color:"#333", marginTop:12 }}>
+                Si el archivo abre en el navegador → mantén presionado → Guardar
               </p>
             </div>
           </div>
         )}
 
-        {/* How to use */}
-        {!result && !loading && (
-          <div style={{marginTop:8}}>
-            <p style={{fontSize:12,color:"#444",textAlign:"center",textTransform:"uppercase",letterSpacing:"0.6px",marginBottom:20,fontWeight:600}}>
-              Cómo funciona
-            </p>
-            <div className="steps-grid">
+        {/* ── Features ── */}
+        {!result && (
+          <div style={{ maxWidth:680, margin:"0 auto" }}>
+            <div className="features-grid" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:14, marginBottom:40 }}>
               {[
-                {n:"01",title:"Copia el enlace",desc:"Abre TikTok, toca Compartir → Copiar enlace en cualquier video."},
-                {n:"02",title:"Pega aquí",desc:"Pega el enlace en el campo de arriba y presiona Descargar."},
-                {n:"03",title:"Descarga gratis",desc:"Elige la calidad y descarga directo a tu dispositivo. Sin registro."},
-              ].map(s=>(
-                <div key={s.n} style={{background:"#0f0f0f",border:"1px solid #1a1a1a",borderRadius:12,padding:"20px"}}>
-                  <div style={{
-                    fontFamily:"monospace",fontSize:11,color:"#ff2d55",fontWeight:700,
-                    letterSpacing:"1px",marginBottom:10
-                  }}>{s.n}</div>
-                  <div style={{fontWeight:600,fontSize:14,marginBottom:6}}>{s.title}</div>
-                  <div style={{fontSize:13,color:"#555",lineHeight:1.6}}>{s.desc}</div>
+                { icon:"⚡", title:"Rápido", desc:"Descarga en segundos, sin esperas ni captchas." },
+                { icon:"🎬", title:"Sin marca", desc:"Video limpio directo de TikTok, sin logos." },
+                { icon:"🎵", title:"Audio MP3", desc:"Extrae el audio de cualquier video gratis." },
+              ].map(f => (
+                <div className="feature-card" key={f.title}>
+                  <div style={{ fontSize:26, marginBottom:10 }}>{f.icon}</div>
+                  <div style={{ fontWeight:700, fontSize:14, marginBottom:6, fontFamily:"'Syne',sans-serif" }}>{f.title}</div>
+                  <div style={{ fontSize:12, color:"#555", lineHeight:1.6 }}>{f.desc}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Steps */}
+            <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+              <p style={{ fontSize:11, color:"#444", fontWeight:600, letterSpacing:".8px", textTransform:"uppercase", marginBottom:4 }}>Cómo usar</p>
+              {[
+                { n:"1", t:"Abre TikTok y elige un video", d:"Toca los tres puntos → Compartir → Copiar enlace." },
+                { n:"2", t:"Pega el enlace arriba", d:'Toca el botón "Pegar" o pégalo manualmente en el campo.' },
+                { n:"3", t:"Elige y descarga", d:"Selecciona la calidad que prefieras. El archivo se guarda directo." },
+              ].map(s => (
+                <div key={s.n} style={{ display:"flex", alignItems:"flex-start", gap:14, padding:"14px 16px", background:"rgba(255,255,255,.02)", border:"1px solid rgba(255,255,255,.06)", borderRadius:14 }}>
+                  <div className="step-num">{s.n}</div>
+                  <div>
+                    <div style={{ fontWeight:600, fontSize:14, marginBottom:3 }}>{s.t}</div>
+                    <div style={{ fontSize:13, color:"#555", lineHeight:1.55 }}>{s.d}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -442,9 +440,16 @@ export default function TikTokDownloader() {
         )}
       </main>
 
-      <footer style={{borderTop:"1px solid #111",padding:"20px 24px",textAlign:"center"}}>
-        <p style={{fontSize:12,color:"#333"}}>
-          No almacenamos ningún video. Los archivos provienen directamente de los servidores de TikTok.
+      {/* ── Footer ── */}
+      <footer style={{ position:"relative", zIndex:1, borderTop:"1px solid rgba(255,255,255,.05)", padding:"24px", textAlign:"center" }}>
+        <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginBottom:8 }}>
+          <Logo/>
+          <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:16 }}>
+            Tik<span style={{ color:"#ff2d55" }}>Shak</span>
+          </span>
+        </div>
+        <p style={{ fontSize:12, color:"#333" }}>
+          No almacenamos videos. Todo va directo desde TikTok a tu dispositivo.
         </p>
       </footer>
     </div>
